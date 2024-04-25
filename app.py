@@ -1,3 +1,5 @@
+import os
+import gdown
 import pickle
 import streamlit as st
 import requests
@@ -25,6 +27,10 @@ def recommend(movie):
         return recommended_movie_names
     else:
         return []
+
+# Check if similarity.pkl exists, if not, download it from Google Drive
+if not os.path.exists('similarity.pkl'):
+    gdown.download('https://drive.google.com/uc?id=13GjpJHK8J0iUwYwIcGK9a_mgBGOt7rZT', 'similarity.pkl', quiet=False)
 
 # Load movie list and similarity data
 movies = pickle.load(open('movie_list.pkl', 'rb'))
